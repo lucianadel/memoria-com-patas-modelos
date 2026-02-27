@@ -1,0 +1,1 @@
+// JS ficará para Sprint 2 (galeria, música, vídeo etc.)

@@ -1,0 +1,168 @@
+:root{
+  --bg: #f7f6f3;
+  --card: #ffffff;
+  --text: #222;
+  --muted: #6b6b6b;
+  --line: #e6e3dd;
+  --shadow: 0 10px 30px rgba(0,0,0,.06);
+  --radius: 16px;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+ font-family: 'Inter', sans-serif;
+  background: #f4f2ee;
+  color: #222;
+  line-height: 1.6;
+}
+
+.container{
+  width: min(980px, 92%);
+  margin: 0 auto;
+}
+
+.brand{
+  .brand {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 25px;
+}
+}
+
+.hero {
+  padding: 80px 0 40px;
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+}
+
+.hero-media {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pet-name {
+  .pet-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+}
+
+.pet-meta {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.pet-phrase {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+
+.hero-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--text);
+  text-decoration: none;
+  color: var(--text);
+  font-size: .95rem;
+  transition: .2s ease;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+}
+
+.btn-ghost{
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.section{
+  padding: 34px 0;
+}
+
+.section h2{
+  section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+}
+
+.text{
+  color: #2e2e2e;
+  font-size: 1.05rem;
+}
+
+.moments{
+  list-style: none;
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.moment{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 20px 0 34px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.small{
+  font-size: .85rem;
+  margin-top: 6px;
+}
+
+/* Responsivo */
+@media (max-width: 860px){
+  .hero-card{
+    grid-template-columns: 1fr;
+  }
+}
