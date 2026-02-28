@@ -4,70 +4,165 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Memória com Patas • Modelo Vida</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
-  
 </head>
 
 <body>
+
+  <!-- HERO -->
   <header class="hero">
     <div class="container">
       <p class="brand">Memória com Patas</p>
 
       <div class="hero-card">
-        <div class="hero-media" aria-label="Foto do pet">
-          <!-- Troque o caminho pela foto do pet -->
-         <img src="luninha-perfil.jpg" alt="Foto do pet">
+
+        <div class="hero-media">
+         <img src="assets/img/perfil3.jpg" alt="Foto do pet">
         </div>
 
         <div class="hero-text">
           <h1 class="pet-name">Luna Maria</h1>
-          <p class="pet-meta">Idade:6 <span>__ anos</span> • Adoção: <span>_16_/06_/__2020__</span></p>
+          <p class="pet-meta">
+            Idade: 6 anos • Adoção: 16/06/2020
+          </p>
 
-          <p class="pet-phrase">“V-A-M-O-S?.”</p>
+          <p class="pet-phrase">V-A-M-O-S?</p>
 
           <div class="hero-actions">
             <a class="btn" href="#historia">Ver história</a>
             <a class="btn btn-ghost" href="#momentos">Momentos</a>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </header>
 
+  <section class="section">
+  <div class="container">
+    <h2>Informações do Pet</h2>
+
+    <div class="pet-info">
+      <p><strong>Nome completo:</strong> Luna Maria</p>
+      <p><strong>Idade:</strong> 6 anos</p>
+      <p><strong>Data de adoção:</strong> 16/06/2020</p>
+      <p><strong>Cidade:</strong> Teresópolis</p>
+      <p><strong>Raça:</strong> SRD</p>
+    </div>
+  </div>
+</section>
+
   <main>
+
+    <!-- HISTÓRIA -->
     <section id="historia" class="section">
       <div class="container">
         <h2>Como nos conhecemos</h2>
         <p class="text">
-         Meu vizinho, seu Manel, a trouxe da roça. Ela chegou numa caixinha de papelão.
+         Meu vizinho, seu Manel, a trouxe da roça. Ela chegou numa caixinha de papelão, pequena, curiosa e com aquele olhar atento que parecia observar tudo ao redor.
+
+No começo, era só mais um dia comum. Mas bastou aquele primeiro encontro para tudo mudar. Entre passos tímidos e rabinho balançando, ela começou a transformar a casa em lar.
+
+Desde então, cada cantinho ganhou nova vida — e cada rotina passou a ter mais alegria.
         </p>
       </div>
     </section>
 
+    <!-- PERSONALIDADE -->
     <section class="section">
       <div class="container">
         <h2>Personalidade</h2>
         <p class="text">
-          Muito comilona, carinhosa e brincalhona. Adora um passeio.
+          Muito comilona, carinhosa e brincalhona. Adora um passeio e fica animada só de ouvir o barulho da coleira.
+
+Ela tem aquele jeitinho especial de olhar nos olhos, como se entendesse cada palavra. É curiosa, companheira e sempre pronta para uma nova aventura — seja no Horto, na cachoeira ou em um simples passeio pela manhã.
+
+Mas também sabe ser tranquila: gosta de descansar perto, ficar por perto, porque para ela o mais importante nunca foi o lugar… e sim estar junto.
         </p>
       </div>
     </section>
 
-    <section id="momentos" class="section">
+    <!-- MOMENTOS -->
+    
+    <!-- GALERIA (AGORA SEPARADA CORRETAMENTE) -->
+    <section class="section">
       <div class="container">
-        <h2>Momentos marcantes</h2>
+        <h2>Galeria</h2>
+<!-- MOMENTOS -->
+<section id="momentos" class="section">
+  <div class="container">
+    <h2>Momentos marcantes</h2>
 
-        <ul class="moments">
-          <li class="moment">Momento 1 — descreva em uma frase.</li>
-          <li class="moment">Momento 2 — descreva em uma frase.</li>
-          <li class="moment">Momento 3 — descreva em uma frase.</li>
-          <li class="moment">Momento 4 — descreva em uma frase.</li>
-          <li class="moment">Momento 5 — descreva em uma frase.</li>
-        </ul>
+    <div class="moments">
+
+      <div class="moment-card">
+        <p class="moment-text">
+          <strong>01 — Manhãs na grama</strong><br>
+          O sorriso aberto, a língua de fora e o corpo relaxado na grama mostram o quanto ela ama começar o dia ao ar livre.
+        </p>
+      </div>
+
+      <div class="moment-card">
+        <p class="moment-text">
+          <strong>02 — Caminhadas na Casa de Cultura</strong><br>
+          Ela ama aquele caminho. Cheira tudo, observa tudo e anda como se conhecesse cada cantinho do lugar.
+        </p>
+      </div>
+
+      <div class="moment-card">
+        <p class="moment-text">
+          <strong>03 — Tardes no Horto Municipal</strong><br>
+          No Horto, ela se sente livre. A grama, as árvores e o vento no rosto parecem deixar ela ainda mais feliz.  
+          Entre passos sincronizados e a guia colorida, nossos passeios se transformam em pequenos rituais de felicidade.
+        </p>
+      </div>
+
+      <div class="moment-card">
+        <p class="moment-text">
+          <strong>04 — Aventuras na cachoeira</strong><br>
+          Água, pedras e natureza. Ela se transforma — caminha com coragem e parece sorrir o tempo todo.
+        </p>
+      </div>
+
+      <div class="moment-card">
+        <p class="moment-text">
+          <strong>05 — Descanso ao meu lado</strong><br>
+          Depois das aventuras, ela escolhe sempre o mesmo lugar: perto de mim. Porque o verdadeiro lar é onde estamos juntas.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+        <div class="gallery">
+          <img src="assets/img/galeria-1.jpg" alt="Momento 1">
+          <img src="assets/img/galeria-2.jpg" alt="Momento 2">
+          <img src="assets/img/galeria-3.jpg" alt="Momento 3">
+          <img src="assets/img/galeria-4.jpg" alt="Momento 4">
+          <img src="assets/img/galeria-5.jpg" alt="Momento 5">
+          <img src="assets/img/galeria-6.jpg" alt="Momento 6">
+        </div>
       </div>
     </section>
+
+   <section class="section" id="video-section" style="display: none;">
+  <div class="container">
+    <h2>Vídeo Especial</h2>
+
+    <div class="video-wrapper">
+      <iframe 
+        id="video-frame"
+        src=""
+        title="Vídeo do pet"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <footer class="footer">
@@ -77,6 +172,26 @@
     </div>
   </footer>
 
+
+
+  <!-- Música opcional -->
+<audio id="bg-music" loop></audio>
+
+<button id="music-toggle" class="music-btn" style="display: none;">
+  🎵 Música
+</button>
+
+<!-- Seletor de Tema -->
+<div class="theme-selector">
+  <select id="theme-select">
+    <option value="delicado">Delicado</option>
+    <option value="alegre">Alegre</option>
+    <option value="moderno">Moderno</option>
+    <option value="minimalista">Minimalista</option>
+  </select>
+</div>
+
   <script src="./script.js"></script>
+
 </body>
 </html>
