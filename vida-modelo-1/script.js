@@ -99,3 +99,19 @@ if (select) {
   }
 
 }
+
+// ==========================
+// FOTO COM TUTOR
+// ==========================
+
+// coloque aqui manualmente a foto para testar
+const tutorPhotoUrl = "assets/img/familia.jpg"; 
+// deixe "" se não quiser mostrar
+
+if (tutorPhotoUrl !== "") {
+  const juntosSection = document.getElementById("juntos");
+  const tutorImg = document.getElementById("tutor-photo");
+
+  tutorImg.src = tutorPhotoUrl;
+  juntosSection.style.display = "block";
+}

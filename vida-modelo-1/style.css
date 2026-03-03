@@ -13,7 +13,10 @@
   --radius: 20px;
 }
 
+/* ============================= */
 /* RESET */
+/* ============================= */
+
 *{
   margin:0;
   padding:0;
@@ -25,14 +28,33 @@ body{
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
 }
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+*{
+  transition: background-color 0.4s ease,
+              color 0.4s ease,
+              border-color 0.4s ease;
+}
+
+/* ============================= */
+/* CONTAINER */
+/* ============================= */
 
 .container{
   width: min(1000px, 92%);
   margin: 0 auto;
 }
 
+/* ============================= */
 /* BRAND */
+/* ============================= */
+
 .brand{
   font-size: 0.75rem;
   letter-spacing: 4px;
@@ -41,7 +63,10 @@ body{
   margin: 40px 0 30px;
 }
 
+/* ============================= */
 /* HERO */
+/* ============================= */
+
 .hero{
   padding: 60px 0 80px;
 }
@@ -56,7 +81,6 @@ body{
   box-shadow: var(--shadow);
 }
 
-/* 🔥 FOTO PRINCIPAL CORRIGIDA */
 .hero-media{
   height: 420px;
   border-radius: 18px;
@@ -67,6 +91,12 @@ body{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.hero-media img:hover{
+  transform: scale(1.03);
+  filter: brightness(1.05);
 }
 
 .hero-text{
@@ -84,18 +114,6 @@ body{
   color: var(--accent);
 }
 
-.pet-info{
-  display: grid;
-  gap: 10px;
-  margin-top: 15px;
-  font-size: 1rem;
-  color: #333;
-}
-
-.pet-info p{
-  margin: 0;
-}
-
 .pet-meta{
   font-size: 0.95rem;
   color: var(--muted);
@@ -111,7 +129,10 @@ body{
   line-height: 1.8;
 }
 
+/* ============================= */
 /* BOTÕES */
+/* ============================= */
+
 .hero-actions{
   display:flex;
   gap: 12px;
@@ -119,7 +140,6 @@ body{
 }
 
 .btn{
-  display:inline-block;
   padding: 12px 20px;
   border-radius: 999px;
   border: 1px solid var(--accent);
@@ -139,9 +159,12 @@ body{
   color: var(--muted);
 }
 
+/* ============================= */
 /* SEÇÕES */
+/* ============================= */
+
 .section{
-  padding: 90px 0;
+  padding: 80px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -157,20 +180,38 @@ body{
   line-height: 1.9;
 }
 
-/* MOMENTOS */
+/* ============================= */
+/* MOMENTOS PREMIUM */
+/* ============================= */
+
 .moments{
-  list-style: none;
-  margin-top: 25px;
   display: grid;
-  gap: 15px;
+  gap: 40px;
+  margin-top: 50px;
 }
 
-.moment{
-  background: var(--card);
+.moment-card{
+  padding: 30px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px 18px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+
+.moment-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.moment-text{
+  line-height: 1.8;
+  color: #444;
+}
+
+/* ============================= */
+/* GALERIA */
+/* ============================= */
 
 .gallery{
   display: grid;
@@ -184,11 +225,21 @@ body{
   height: auto;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: transform 0.4s ease;
 }
 
 .gallery img:hover{
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
+
+/* reduz espaço só da galeria */
+.gallery-section{
+  padding-bottom: 40px;
+}
+
+/* ============================= */
+/* VÍDEO */
+/* ============================= */
 
 .video-wrapper{
   margin-top: 20px;
@@ -202,11 +253,52 @@ body{
 
 .video-wrapper iframe{
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
 }
+
+/* ============================= */
+/* SEÇÃO JUNTOS */
+/* ============================= */
+
+#juntos{
+  padding-top: 40px;
+}
+
+.together-wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.together-photo img{
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.together-text p{
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* ============================= */
+/* BOTÃO MÚSICA */
+/* ============================= */
 
 .music-btn{
   position: fixed;
@@ -226,36 +318,9 @@ body{
   transform: scale(1.05);
 }
 
-
-
-/* FOOTER */
-.footer{
-  border-top: 1px solid var(--line);
-  padding: 40px 0;
-  color: var(--muted);
-  font-size: .9rem;
-}
-
-.small{
-  font-size: .85rem;
-  margin-top: 6px;
-}
-
-/* RESPONSIVO */
-@media (max-width: 900px){
-
-  .hero-card{
-    grid-template-columns: 1fr;
-  }
-
-  .pet-name{
-    font-size: 2.5rem;
-  }
-
-  .gallery{
-    grid-template-columns: 1fr;
-  }
-}
+/* ============================= */
+/* SELETOR DE TEMA */
+/* ============================= */
 
 .theme-selector{
   position: fixed;
@@ -274,4 +339,27 @@ body{
   background: transparent;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
+}
+
+/* ============================= */
+/* RESPONSIVO */
+/* ============================= */
+
+@media (max-width: 900px){
+
+  .hero-card{
+    grid-template-columns: 1fr;
+  }
+
+  .pet-name{
+    font-size: 2.5rem;
+  }
+
+  .gallery{
+    grid-template-columns: 1fr;
+  }
+
+  .together-wrapper{
+    grid-template-columns: 1fr;
+  }
 }
