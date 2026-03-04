@@ -1,257 +1,237 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memória com Patas • Modelo Vida</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Memória com Patas • Modelo Vida</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <p class="brand">Memória com Patas</p>
+<!-- HERO -->
+<header class="hero">
 
-      <div class="hero-card">
+<div class="container">
 
-        <div class="hero-media">
-         <img src="assets/img/perfil3.jpg" alt="Foto do pet">
-        </div>
+<p class="brand">Memória com Patas</p>
 
-        <div class="hero-text">
-          <h1 class="pet-name">Luna Maria</h1>
-          <p class="pet-meta">
-            Idade: 6 anos • Adoção: 16/06/2020
-          </p>
+<div class="hero-card">
 
-          <p class="pet-phrase">V-A-M-O-S?</p>
+<div class="hero-media">
+<img id="pet-foto" src="" alt="Foto do pet">
+</div>
 
-          <div class="hero-actions">
-            <a class="btn" href="#historia">Ver história</a>
-            <a class="btn btn-ghost" href="#momentos">Momentos</a>
-          </div>
-        </div>
+<div class="hero-text">
 
-      </div>
-    </div>
-  </header>
+<h1 class="pet-name" id="pet-nome"></h1>
 
-  <section class="section">
-  <div class="container">
-    <h2>Informações do Pet</h2>
+<p class="pet-meta" id="pet-meta"></p>
 
-    <div class="pet-info">
-      <p><strong>Nome completo:</strong> Luna Maria</p>
-      <p><strong>Idade:</strong> 6 anos</p>
-      <p><strong>Data de adoção:</strong> 16/06/2020</p>
-      <p><strong>Cidade:</strong> Teresópolis</p>
-      <p><strong>Raça:</strong> SRD</p>
-    </div>
-  </div>
+<p class="pet-phrase" id="pet-frase"></p>
+
+<div class="hero-actions">
+<a class="btn" href="#historia">Ver história</a>
+<a class="btn btn-ghost" href="#momentos">Momentos</a>
+</div>
+
+</div>
+</div>
+</div>
+
+</header>
+
+
+<!-- INFORMAÇÕES -->
+<section class="section">
+
+<div class="container">
+
+<h2>Informações do Pet</h2>
+
+<div class="pet-info">
+
+<p><strong>Nome completo:</strong> <span id="info-nome"></span></p>
+
+<p><strong>Idade:</strong> <span id="info-idade"></span></p>
+
+<p><strong>Data de adoção:</strong> <span id="info-adocao"></span></p>
+
+<p><strong>Cidade:</strong> <span id="info-cidade"></span></p>
+
+<p><strong>Raça:</strong> <span id="info-raca"></span></p>
+
+</div>
+
+</div>
 </section>
 
-  <main>
 
-    <!-- HISTÓRIA -->
-    <section id="historia" class="section">
-      <div class="container">
-        <h2>Como nos conhecemos</h2>
-        <p class="text">
-         Meu vizinho, seu Manel, a trouxe da roça. Ela chegou numa caixinha de papelão, pequena, curiosa e com aquele olhar atento que parecia observar tudo ao redor.
+<main>
 
-No começo, era só mais um dia comum. Mas bastou aquele primeiro encontro para tudo mudar. Entre passos tímidos e rabinho balançando, ela começou a transformar a casa em lar.
+<!-- HISTÓRIA -->
+<section id="historia" class="section">
 
-Desde então, cada cantinho ganhou nova vida — e cada rotina passou a ter mais alegria.
-        </p>
-      </div>
-    </section>
+<div class="container">
 
-    <!-- PERSONALIDADE -->
-    <section class="section">
-      <div class="container">
-        <h2>Personalidade</h2>
-        <p class="text">
-        Muito comilona, carinhosa e brincalhona.
-Adora um passeio — e fica completamente animada só de ouvir a palavra “V-A-M-O-S?”.
+<h2>Como nos conhecemos</h2>
 
-A gente nem precisa falar direito. Basta soletrar… e ela entende.
-O rabinho começa a balançar, os olhos brilham e o coração já parece estar na rua antes mesmo da coleira aparecer.
+<p class="text" id="pet-historia"></p>
 
-Ela tem aquele jeitinho especial de olhar nos olhos, como se entendesse cada palavra. É curiosa, companheira e sempre pronta para uma nova aventura — seja no Horto, na cachoeira ou em um simples passeio pela manhã.
+</div>
 
-Mas também sabe ser tranquila: gosta de descansar perto, ficar por perto. Porque para ela, o mais importante nunca foi o lugar… e sim estar junto.
-        </p>
-      </div>
-    </section>
+</section>
 
-   <!-- MOMENTOS -->
+
+<!-- PERSONALIDADE -->
+<section class="section">
+
+<div class="container">
+
+<h2>Personalidade</h2>
+
+<p class="text" id="pet-personalidade"></p>
+
+</div>
+
+</section>
+
+
+<!-- MOMENTOS -->
 <section id="momentos" class="section">
-  <div class="container">
-    <h2>Momentos marcantes</h2>
 
-    <div class="moments">
+<div class="container">
 
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">01</span>
-          <h3 class="moment-title">Manhãs na grama</h3>
-        </div>
-        <p class="moment-text">
-          O sorriso aberto, a língua de fora e o corpo relaxado na grama mostram o quanto ela ama começar o dia ao ar livre.
-        </p>
-      </div>
-galeria-
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">02</span>
-          <h3 class="moment-title">Caminhadas na Casa de Cultura</h3>
-        </div>
-        <p class="moment-text">
-          Ela ama aquele caminho. Cheira tudo, observa tudo e anda como se conhecesse cada cantinho do lugar.
-        </p>
-      </div>
+<h2>Momentos marcantes</h2>
 
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">03</span>
-          <h3 class="moment-title">Tardes no Horto Municipal</h3>
-        </div>
-        <p class="moment-text">
-          No Horto, ela se sente livre. A grama, as árvores e o vento no rosto parecem deixar ela ainda mais feliz.
-        </p>
-      </div>
+<div class="moments" id="momentos-lista">
 
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">04</span>
-          <h3 class="moment-title">Aventuras na cachoeira</h3>
-        </div>
-        <p class="moment-text">
-          Água, pedras e natureza. Ela se transforma — caminha com coragem e parece sorrir o tempo todo.
-        </p>
-      </div>
+</div>
 
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">05</span>
-          <h3 class="moment-title">Descanso ao meu lado</h3>
-        </div>
-        <p class="moment-text">
-          Depois das aventuras, ela escolhe sempre o mesmo lugar: perto de mim. Porque o verdadeiro lar é onde estamos juntas.
-        </p>
-      </div>
+</div>
 
-      <div class="moment-card">
-        <div class="moment-header">
-          <span class="moment-number">06</span>
-          <h3 class="moment-title">A Luninha pequena</h3>
-        </div>
-        <p class="moment-text">
-          Pequenina no tamanho, mas gigante no olhar.
-Ali começava uma história que transformaria todos os dias em companhia, carinho e descobertas.
-Era só uma filhotinha… mas já carregava dentro dela todo o amor que viria.
-        </p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 
 <!-- GALERIA -->
 <section class="section">
-  <div class="container">
-    <h2>Galeria</h2>
 
-    <div class="gallery">
-      <img src="assets/img/galeria-1.jpg" alt="Momento 1">
-      <img src="assets/img/galeria-02.jpg" alt="Momento 2">
-      <img src="assets/img/galeria-3.jpg" alt="Momento 3">
-      <img src="assets/img/galeria-4.jpg" alt="Momento 4">
-      <img src="assets/img/galeria-5.jpg" alt="Momento 5">
-      <img src="assets/img/galeria-06.jpg" alt="Momento 6">
-     
-    </div>
+<div class="container">
 
-  </div>
-</section>
+<h2>Galeria</h2>
 
-   <section class="section" id="video-section" style="display: none;">
-  <div class="container">
-    <h2>Vídeo Especial</h2>
+<div class="gallery" id="galeria">
 
-    <div class="video-wrapper">
-      <iframe 
-        id="video-frame"
-        src=""
-        title="Vídeo do pet"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-</section>
-
-<!-- JUNTOS -->
-<section class="section" id="juntos" style="display: none;">
-  <div class="container">
-
-    <h2>Juntos</h2>
-
-    <div class="together-wrapper">
-      <div class="together-photo">
-        <img id="tutor-photo" src="" alt="Tutor e pet">
-      </div>
-
-      <div class="together-text">
-        <p>
-          Mais do que passeios, fotos e aventuras…  
-          o que realmente importa é o que construímos juntas todos os dias.
-        </p>
-
-        <p>
-          Porque o verdadeiro lar nunca foi um lugar —  
-          sempre foi estar ao seu lado.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <p>Memória com Patas • Celebrando vidas especiais</p>
-      <p class="small">Página criada com carinho 💛</p>
-    </div>
-  </footer>
-
-
-
-  <!-- Música opcional -->
-<audio id="bg-music" loop></audio>
-
-<button id="music-toggle" class="music-btn" style="display: none;">
-  🎵 Música
-</button>
-
-<!-- Seletor de Tema -->
-<div class="theme-selector">
-  <select id="theme-select">
-    <option value="delicado">Delicado</option>
-    <option value="alegre">Alegre</option>
-    <option value="moderno">Moderno</option>
-    <option value="minimalista">Minimalista</option>
-  </select>
 </div>
 
-  <script src="./script.js"></script>
+</div>
+
+</section>
+
+
+<!-- VIDEO -->
+<section class="section" id="video-section" style="display:none;">
+
+<div class="container">
+
+<h2>Vídeo Especial</h2>
+
+<div class="video-wrapper">
+
+<iframe
+id="video-frame"
+src=""
+title="Vídeo do pet"
+frameborder="0"
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TUTOR -->
+<section class="section" id="juntos" style="display:none;">
+
+<div class="container">
+
+<h2>Juntos</h2>
+
+<div class="together-wrapper">
+
+<div class="together-photo">
+<img id="tutor-photo" src="" alt="Tutor e pet">
+</div>
+
+<div class="together-text">
+
+<p>
+Mais do que passeios, fotos e aventuras…
+o que realmente importa é o que construímos juntos todos os dias.
+</p>
+
+<p>
+Porque o verdadeiro lar nunca foi um lugar —
+sempre foi estar ao seu lado.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+<div class="container">
+
+<p>Memória com Patas • Celebrando vidas especiais</p>
+
+<p class="small">Página criada com carinho 💛</p>
+
+</div>
+
+</footer>
+
+
+<!-- MÚSICA -->
+<audio id="bg-music" loop></audio>
+
+<button id="music-toggle" class="music-btn" style="display:none;">
+🎵 Música
+</button>
+
+
+<!-- TEMA -->
+<div class="theme-selector">
+
+<select id="theme-select">
+
+<option value="delicado">Delicado</option>
+<option value="alegre">Alegre</option>
+<option value="moderno">Moderno</option>
+<option value="minimalista">Minimalista</option>
+
+</select>
+
+</div>
+
+
+<script src="./script.js"></script>
 
 </body>
 </html>
