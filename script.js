@@ -1,5 +1,5 @@
 // ==========================
-// API DO GOOGLE APPS SCRIPT
+// API GOOGLE APPS SCRIPT
 // ==========================
 
 const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryTrhPAa0Q6hQKJu1N_DLxH7PyvPt9mXHpZad87pEldvkGa/exec";
@@ -11,11 +11,9 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryT
 
 let petId = null;
 
-// ?id=xxxxx
 const params = new URLSearchParams(window.location.search);
 petId = params.get("id");
 
-// tentar pegar da rota
 if (!petId) {
 
   const path = window.location.pathname;
@@ -32,9 +30,73 @@ if (!petId) {
 
 if (!petId || petId === "index.html") {
 
-  console.log("Modo institucional ativado");
+  console.log("Modo institucional (modelo Luna)");
+
+  esconderLoader();
 
 } else {
+
+  carregarPet(petId);
+
+}
+
+
+// ==========================
+// FUNÇÃO PRINCIPAL
+// ==========================
+
+function carregarPet(id){
+
+fetch(`${API_URL}?id=${id}`)
+
+.then(response => response.json())
+
+.then(data => {
+
+  console.log("RETORNO API:", data);
+
+  if (!data.ok) {
+
+    console.error("Pet não encontrado");
+
+    esconderLoader();
+    return;
+
+  }
+
+  const pet = data.data;
+
+
+  preencherHero(pet);
+
+  preencherHistoria(pet);
+
+  preencherMomentos(pet);
+
+  preencherGaleria(pet);
+
+  preencherVideo(pet);
+
+  preencherTutor(pet);
+
+  configurarMusica(pet);
+
+  aplicarTema(pet);
+
+  esconderLoader();
+
+})
+
+.catch(error => {
+
+  console.error("Erro ao carregar API:", error);
+
+  esconderLoader();
+
+});
+
+}
+
 
 
 // ==========================
@@ -52,53 +114,22 @@ function setText(id, value){
 }
 
 
-// ==========================
-// BUSCAR DADOS DA PLANILHA
-// ==========================
-
-fetch(`${API_URL}?id=${petId}`)
-
-.then(response => response.json())
-
-.then(data => {
-
-  console.log("RETORNO API:", data);
-
-  if (!data.ok) {
-
-    console.error("Pet não encontrado");
-
-    const loader = document.getElementById("loader");
-
-    if(loader){
-      loader.style.display = "none";
-    }
-
-    return;
-
-  }
-
-  const pet = data.data;
-
 
 // ==========================
 // HERO
 // ==========================
 
+function preencherHero(pet){
+
 setText("pet-nome", pet["Nome do pet"]);
 
 setText(
   "pet-meta",
-  "Idade: " + (pet["Qual a idade atual do seu pet?"] || "") +
+  "Idade: " + (pet["Qual a idade atual do seu pet"] || "") +
   " • Adoção: " + (pet["Data de adoção (opcional)"] || "")
 );
 
 setText("pet-frase", pet["Uma frase que define seu pet"]);
-
-
-// ==========================
-// FOTO PRINCIPAL
-// ==========================
 
 const fotoPrincipal = document.getElementById("pet-foto");
 
@@ -114,51 +145,66 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 
 }
 
+}
+
+
 
 // ==========================
 // HISTÓRIA
 // ==========================
 
-setText("pet-historia", pet["Como se conheceram"]);
+function preencherHistoria(pet){
+
+setText(
+  "pet-historia",
+  pet["Como vocês se conheceram?"]
+);
+
+setText(
+  "pet-personalidade",
+  pet["Descreva a personalidade do seu pet"]
+);
+
+}
+
 
 
 // ==========================
-// PERSONALIDADE
+// MOMENTOS
 // ==========================
 
-setText("pet-personalidade", pet["Descreva a personalidade do seu pet"]);
+function preencherMomentos(pet){
 
+setText("momento1", pet["Momentos marcantes (até 5)"]);
 
-// ==========================
-// TIMELINE
-// ==========================
+setText("momento2", pet["Descreva a personalidade do seu pet"]);
+
+setText("momento3", pet["Uma frase que define seu pet"]);
 
 setText("timeline1-titulo", "Chegada na família");
-setText("timeline1-texto", pet["Como se conheceram"]);
+setText("timeline1-texto", pet["Como vocês se conheceram?"]);
 
-setText("timeline2-titulo", "Primeiros momentos");
-setText("timeline2-texto", pet["Momentos marcantes"]);
+setText("timeline2-titulo", "Momentos especiais");
+setText("timeline2-texto", pet["Momentos marcantes (até 5)"]);
 
-setText("timeline3-titulo", "Histórias inesquecíveis");
+setText("timeline3-titulo", "Uma frase especial");
 setText("timeline3-texto", pet["Uma frase que define seu pet"]);
 
+}
 
-// ==========================
-// MOMENTOS MARCANTES
-// ==========================
-
-setText("momento1", pet["Momentos marcantes"]);
-setText("momento2", pet["Descreva a personalidade do seu pet"]);
-setText("momento3", pet["Uma frase que define seu pet"]);
 
 
 // ==========================
 // GALERIA
 // ==========================
 
+function preencherGaleria(pet){
+
 const galleryContainer = document.getElementById("galeria");
 
-if (pet["Envie as fotos do seu pet (boa qualidade)"] && galleryContainer) {
+if (!galleryContainer) return;
+
+if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 
   const fotos = pet["Envie as fotos do seu pet (boa qualidade)"].split(",");
 
@@ -177,10 +223,15 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"] && galleryContainer) {
 
 }
 
+}
+
+
 
 // ==========================
-// VÍDEO
+// VIDEO
 // ==========================
+
+function preencherVideo(pet){
 
 const videoFrame = document.getElementById("video-frame");
 const videoSection = document.getElementById("video-section");
@@ -190,7 +241,9 @@ let videoLink = pet["Envie o link do vídeo (YouTube ou Google Drive)"];
 if (videoLink && videoFrame && videoSection) {
 
   if(videoLink.includes("watch?v=")){
+
     videoLink = videoLink.replace("watch?v=","embed/");
+
   }
 
   videoFrame.src = videoLink;
@@ -199,10 +252,15 @@ if (videoLink && videoFrame && videoSection) {
 
 }
 
+}
+
+
 
 // ==========================
 // FOTO COM TUTOR
 // ==========================
+
+function preencherTutor(pet){
 
 const tutorPhoto = document.getElementById("tutor-photo");
 const juntosSection = document.getElementById("juntos");
@@ -219,55 +277,69 @@ if (pet["Envie a foto com o tutor/família"]) {
 
 }
 
+}
+
+
 
 // ==========================
 // MÚSICA
 // ==========================
 
+function configurarMusica(pet){
+
 const music = document.getElementById("bg-music");
 const button = document.getElementById("music-toggle");
 
+if (!music || !button) return;
+
 if (pet["Deseja incluir música de fundo no site?"] === "Sim, música instrumental padrão") {
 
-  if (music && button) {
+  music.src = "assets/audio/musica.mp3";
 
-    music.src = "assets/audio/musica.mp3";
+  button.style.display = "block";
 
-    button.style.display = "block";
+  button.innerText = "🎵 Tocar música";
 
-    button.innerText = "🎵 Tocar música";
+  button.addEventListener("click", () => {
 
-    button.addEventListener("click", () => {
+    if (music.paused) {
 
-      if (music.paused) {
+      music.play();
 
-        music.play();
-        button.innerText = "⏸ Pausar música";
+      button.innerText = "⏸ Pausar música";
 
-      } else {
+    } else {
 
-        music.pause();
-        button.innerText = "🎵 Tocar música";
+      music.pause();
 
-      }
+      button.innerText = "🎵 Tocar música";
 
-    });
+    }
 
-  }
+  });
 
 }
+
+}
+
 
 
 // ==========================
 // TEMA VIDA / MEMORIAL
 // ==========================
 
-if (pet["Tipo de página"] === "Memorial") {
+function aplicarTema(pet){
+
+const fotoPrincipal = document.getElementById("pet-foto");
+
+if (pet["Qual tipo de página você deseja criar?"] === "Memorial") {
 
   document.body.classList.add("tema-memorial");
 
   if (fotoPrincipal && !fotoPrincipal.src) {
+
     fotoPrincipal.src = "assets/img/memorial-placeholder.jpg";
+
   }
 
 } else {
@@ -276,29 +348,22 @@ if (pet["Tipo de página"] === "Memorial") {
 
 }
 
+}
+
+
 
 // ==========================
-// ESCONDER LOADER
+// LOADER
 // ==========================
+
+function esconderLoader(){
 
 const loader = document.getElementById("loader");
 
-if (loader) {
+if(loader){
+
   loader.style.display = "none";
+
 }
-
-})
-
-.catch(error => {
-
-  console.error("Erro ao carregar API:", error);
-
-  const loader = document.getElementById("loader");
-
-  if (loader) {
-    loader.style.display = "none";
-  }
-
-});
 
 }
