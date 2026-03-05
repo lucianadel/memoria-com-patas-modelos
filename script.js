@@ -33,9 +33,8 @@ if (!petId) {
 if (!petId || petId === "index.html") {
 
   console.log("Modo institucional ativado");
-  return;
 
-}
+} else {
 
 
 // ==========================
@@ -58,6 +57,7 @@ function setText(id, value){
 // ==========================
 
 fetch(`${API_URL}?id=${petId}`)
+
 .then(response => response.json())
 
 .then(data => {
@@ -67,12 +67,18 @@ fetch(`${API_URL}?id=${petId}`)
   if (!data.ok) {
 
     console.error("Pet não encontrado");
+
+    const loader = document.getElementById("loader");
+
+    if(loader){
+      loader.style.display = "none";
+    }
+
     return;
 
   }
 
   const pet = data.data;
-
 
 
 // ==========================
@@ -88,7 +94,6 @@ setText(
 );
 
 setText("pet-frase", pet["Uma frase que define seu pet"]);
-
 
 
 // ==========================
@@ -110,7 +115,6 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 }
 
 
-
 // ==========================
 // HISTÓRIA
 // ==========================
@@ -118,13 +122,11 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 setText("pet-historia", pet["Como se conheceram"]);
 
 
-
 // ==========================
 // PERSONALIDADE
 // ==========================
 
 setText("pet-personalidade", pet["Descreva a personalidade do seu pet"]);
-
 
 
 // ==========================
@@ -141,7 +143,6 @@ setText("timeline3-titulo", "Histórias inesquecíveis");
 setText("timeline3-texto", pet["Uma frase que define seu pet"]);
 
 
-
 // ==========================
 // MOMENTOS MARCANTES
 // ==========================
@@ -149,7 +150,6 @@ setText("timeline3-texto", pet["Uma frase que define seu pet"]);
 setText("momento1", pet["Momentos marcantes"]);
 setText("momento2", pet["Descreva a personalidade do seu pet"]);
 setText("momento3", pet["Uma frase que define seu pet"]);
-
 
 
 // ==========================
@@ -178,7 +178,6 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"] && galleryContainer) {
 }
 
 
-
 // ==========================
 // VÍDEO
 // ==========================
@@ -190,11 +189,8 @@ let videoLink = pet["Envie o link do vídeo (YouTube ou Google Drive)"];
 
 if (videoLink && videoFrame && videoSection) {
 
-  // converter youtube
   if(videoLink.includes("watch?v=")){
-
     videoLink = videoLink.replace("watch?v=","embed/");
-
   }
 
   videoFrame.src = videoLink;
@@ -202,7 +198,6 @@ if (videoLink && videoFrame && videoSection) {
   videoSection.style.display = "block";
 
 }
-
 
 
 // ==========================
@@ -216,15 +211,13 @@ if (pet["Envie a foto com o tutor/família"]) {
 
   if (tutorPhoto && juntosSection) {
 
-    tutorPhoto.src =
-      pet["Envie a foto com o tutor/família"];
+    tutorPhoto.src = pet["Envie a foto com o tutor/família"];
 
     juntosSection.style.display = "block";
 
   }
 
 }
-
 
 
 // ==========================
@@ -238,9 +231,11 @@ if (pet["Deseja incluir música de fundo no site?"] === "Sim, música instrument
 
   if (music && button) {
 
-    music.src = "assets/music/musica.mp3";
+    music.src = "assets/audio/musica.mp3";
 
     button.style.display = "block";
+
+    button.innerText = "🎵 Tocar música";
 
     button.addEventListener("click", () => {
 
@@ -252,7 +247,7 @@ if (pet["Deseja incluir música de fundo no site?"] === "Sim, música instrument
       } else {
 
         music.pause();
-        button.innerText = "🎵 Música";
+        button.innerText = "🎵 Tocar música";
 
       }
 
@@ -263,7 +258,6 @@ if (pet["Deseja incluir música de fundo no site?"] === "Sim, música instrument
 }
 
 
-
 // ==========================
 // TEMA VIDA / MEMORIAL
 // ==========================
@@ -272,10 +266,8 @@ if (pet["Tipo de página"] === "Memorial") {
 
   document.body.classList.add("tema-memorial");
 
-  if(fotoPrincipal && !fotoPrincipal.src){
-
+  if (fotoPrincipal && !fotoPrincipal.src) {
     fotoPrincipal.src = "assets/img/memorial-placeholder.jpg";
-
   }
 
 } else {
@@ -284,10 +276,29 @@ if (pet["Tipo de página"] === "Memorial") {
 
 }
 
+
+// ==========================
+// ESCONDER LOADER
+// ==========================
+
+const loader = document.getElementById("loader");
+
+if (loader) {
+  loader.style.display = "none";
+}
+
 })
 
 .catch(error => {
 
-console.error("Erro ao carregar API:", error);
+  console.error("Erro ao carregar API:", error);
+
+  const loader = document.getElementById("loader");
+
+  if (loader) {
+    loader.style.display = "none";
+  }
 
 });
+
+}
