@@ -11,6 +11,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryT
 
 let petId = null;
 
+// ?id=xxxxx
 const params = new URLSearchParams(window.location.search);
 petId = params.get("id");
 
@@ -38,26 +39,6 @@ if (!petId || petId === "index.html") {
 
 
 // ==========================
-// BUSCAR DADOS DA PLANILHA
-// ==========================
-
-fetch(`${API_URL}?id=${petId}`)
-.then(response => response.json())
-
-.then(data => {
-
-  console.log("RETORNO API:", data);
-
-  if (!data.ok) {
-    alert("Pet não encontrado.");
-    return;
-  }
-
-  const pet = data.data;
-
-
-
-// ==========================
 // FUNÇÃO AUXILIAR
 // ==========================
 
@@ -70,6 +51,27 @@ function setText(id, value){
   }
 
 }
+
+
+// ==========================
+// BUSCAR DADOS DA PLANILHA
+// ==========================
+
+fetch(`${API_URL}?id=${petId}`)
+.then(response => response.json())
+
+.then(data => {
+
+  console.log("RETORNO API:", data);
+
+  if (!data.ok) {
+
+    console.error("Pet não encontrado");
+    return;
+
+  }
+
+  const pet = data.data;
 
 
 
@@ -99,25 +101,13 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 
   const fotos = pet["Envie as fotos do seu pet (boa qualidade)"].split(",");
 
-  if (fotoPrincipal) {
+  if (fotoPrincipal && fotos.length > 0) {
 
     fotoPrincipal.src = fotos[0].trim();
 
   }
 
 }
-
-
-
-// ==========================
-// INFORMAÇÕES
-// ==========================
-
-setText("info-nome", pet["Nome do pet"]);
-setText("info-idade", pet["Qual a idade atual do seu pet?"]);
-setText("info-adocao", pet["Data de adoção (opcional)"]);
-setText("info-cidade", pet["Cidade"]);
-setText("info-raca", pet["Raça"]);
 
 
 
@@ -134,6 +124,31 @@ setText("pet-historia", pet["Como se conheceram"]);
 // ==========================
 
 setText("pet-personalidade", pet["Descreva a personalidade do seu pet"]);
+
+
+
+// ==========================
+// TIMELINE
+// ==========================
+
+setText("timeline1-titulo", "Chegada na família");
+setText("timeline1-texto", pet["Como se conheceram"]);
+
+setText("timeline2-titulo", "Primeiros momentos");
+setText("timeline2-texto", pet["Momentos marcantes"]);
+
+setText("timeline3-titulo", "Histórias inesquecíveis");
+setText("timeline3-texto", pet["Uma frase que define seu pet"]);
+
+
+
+// ==========================
+// MOMENTOS MARCANTES
+// ==========================
+
+setText("momento1", pet["Momentos marcantes"]);
+setText("momento2", pet["Descreva a personalidade do seu pet"]);
+setText("momento3", pet["Uma frase que define seu pet"]);
 
 
 
@@ -171,16 +186,20 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"] && galleryContainer) {
 const videoFrame = document.getElementById("video-frame");
 const videoSection = document.getElementById("video-section");
 
-if (pet["Envie o link do vídeo (YouTube ou Google Drive)"]) {
+let videoLink = pet["Envie o link do vídeo (YouTube ou Google Drive)"];
 
-  if (videoFrame && videoSection) {
+if (videoLink && videoFrame && videoSection) {
 
-    videoFrame.src =
-      pet["Envie o link do vídeo (YouTube ou Google Drive)"];
+  // converter youtube
+  if(videoLink.includes("watch?v=")){
 
-    videoSection.style.display = "block";
+    videoLink = videoLink.replace("watch?v=","embed/");
 
   }
+
+  videoFrame.src = videoLink;
+
+  videoSection.style.display = "block";
 
 }
 
@@ -265,13 +284,10 @@ if (pet["Tipo de página"] === "Memorial") {
 
 }
 
-
-
 })
 
 .catch(error => {
 
-console.error("Erro:", error);
-alert("Erro ao carregar dados.");
+console.error("Erro ao carregar API:", error);
 
 });
