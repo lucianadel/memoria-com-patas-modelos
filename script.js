@@ -12,8 +12,9 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryT
 let petId = null;
 
 const params = new URLSearchParams(window.location.search);
-petId = params.get("id");
+petId = params.get("petId");
 
+// fallback para URL limpa
 if (!petId) {
 
   const path = window.location.pathname;
@@ -30,7 +31,7 @@ if (!petId) {
 
 if (!petId || petId === "index.html") {
 
-  console.log("Modo institucional (modelo Luna)");
+  console.log("Modo institucional (modelo)");
 
   esconderLoader();
 
@@ -41,13 +42,14 @@ if (!petId || petId === "index.html") {
 }
 
 
+
 // ==========================
 // FUNÇÃO PRINCIPAL
 // ==========================
 
 function carregarPet(id){
 
-fetch(`${API_URL}?id=${id}`)
+fetch(`${API_URL}?petId=${id}`)
 
 .then(response => response.json())
 
