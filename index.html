@@ -3,275 +3,278 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Memória com Patas</title>
+<title>Memória com Patas</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap"
-        rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 
 <body class="tema-vida">
 
-    <div id="loader">
 
-  <div class="loader-content">
+<!-- LOADER -->
 
-    <h1>🐾</h1>
+<div id="loader">
 
-    <h2>Carregando memória...</h2>
+<div class="loader-content">
 
-    <p>Preparando o memorial do pet</p>
+<h1>🐾</h1>
 
-  </div>
+<h2>Carregando memória...</h2>
+
+<p>Preparando o memorial do pet</p>
 
 </div>
 
-    </div>
+</div>
 
 
 
+<!-- HERO -->
 
-    <!-- HERO / CAPA -->
+<header class="hero container">
 
-    <header class="hero container">
+<div class="hero-card">
 
-        <div class="hero-card">
+<div class="hero-media">
+<img id="pet-foto" src="assets/img/perfil.jpg" alt="Foto do pet">
+</div>
 
-            <div class="hero-media">
-                <img id="pet-foto" src="assets/img/perfil.jpg" alt="Foto do pet">
-            </div>
+<div class="hero-text">
 
-            <div class="hero-text">
+<h1 id="pet-nome" class="pet-name">
+Nome do Pet
+</h1>
 
-                <h1 id="pet-nome" class="pet-name">
-                    Nome do Pet
-                </h1>
+<p id="pet-meta" class="pet-meta">
+Idade e adoção
+</p>
 
-                <p id="pet-meta" class="pet-meta">
-                    Idade e adoção
-                </p>
+<blockquote id="pet-frase" class="pet-phrase">
+Uma frase especial sobre o pet
+</blockquote>
 
-                <blockquote id="pet-frase" class="pet-phrase">
-                    Uma frase especial sobre o pet
-                </blockquote>
+</div>
 
-            </div>
+</div>
 
-        </div>
+</header>
 
-    </header>
 
 
+<!-- HISTÓRIA -->
 
-    <!-- HISTÓRIA -->
+<section class="section container">
 
-    <section class="section container">
+<h2>Nossa história</h2>
 
-        <h2>Nossa história</h2>
+<p id="pet-historia" class="text">
+Aqui vai a história do pet.
+</p>
 
-        <p id="pet-historia" class="text">
-            Aqui vai a história do pet.
-        </p>
+</section>
 
-    </section>
 
 
+<!-- PERSONALIDADE -->
 
-    <!-- PERSONALIDADE -->
+<section class="section container">
 
-    <section class="section container">
+<h2>Personalidade</h2>
 
-        <h2>Personalidade</h2>
+<p id="pet-personalidade" class="text">
+Descrição da personalidade do pet.
+</p>
 
-        <p id="pet-personalidade" class="text">
-            Descrição da personalidade do pet.
-        </p>
+</section>
 
-    </section>
 
-    <section class="section container">
 
-        <h2>Momentos da vida</h2>
+<!-- TIMELINE -->
 
-        <div class="timeline">
+<section class="section container">
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Chegada na família</h3>
-                    <p>O dia em que tudo começou.</p>
-                </div>
-            </div>
+<h2>Momentos da vida</h2>
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Primeiro passeio</h3>
-                    <p>Descobrindo o mundo juntos.</p>
-                </div>
-            </div>
+<div class="timeline">
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Momentos especiais</h3>
-                    <p>Histórias que ficam para sempre.</p>
-                </div>
-            </div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3 id="timeline1-titulo">Chegada na família</h3>
+<p id="timeline1-texto">O dia em que tudo começou.</p>
+</div>
+</div>
 
-        </div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3 id="timeline2-titulo">Momentos especiais</h3>
+<p id="timeline2-texto">Descobrindo o mundo juntos.</p>
+</div>
+</div>
 
-    </section>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<h3 id="timeline3-titulo">Uma frase especial</h3>
+<p id="timeline3-texto">Histórias que ficam para sempre.</p>
+</div>
+</div>
 
+</div>
 
+</section>
 
-    <!-- MOMENTOS -->
 
-    <section class="section container">
 
-        <h2>Momentos marcantes</h2>
+<!-- MOMENTOS -->
 
-        <div class="moments">
+<section class="section container">
 
-            <div class="moment-card">
-                <div class="moment-header">
-                    <span class="moment-number">01</span>
-                    <span class="moment-title">Primeiros momentos</span>
-                </div>
+<h2>Momentos marcantes</h2>
 
-                <p class="moment-text">
-                    Momentos especiais vividos com o pet.
-                </p>
-            </div>
+<div class="moments">
 
-            <div class="moment-card">
-                <div class="moment-header">
-                    <span class="moment-number">02</span>
-                    <span class="moment-title">Passeios</span>
-                </div>
+<div class="moment-card">
+<div class="moment-header">
+<span class="moment-number">01</span>
+<span class="moment-title">Primeiros momentos</span>
+</div>
 
-                <p class="moment-text">
-                    Passeios e aventuras juntos.
-                </p>
-            </div>
+<p id="momento1" class="moment-text">
+Momentos especiais vividos com o pet.
+</p>
 
-            <div class="moment-card">
-                <div class="moment-header">
-                    <span class="moment-number">03</span>
-                    <span class="moment-title">Brincadeiras</span>
-                </div>
+</div>
 
-                <p class="moment-text">
-                    Momentos de alegria e brincadeira.
-                </p>
-            </div>
+<div class="moment-card">
+<div class="moment-header">
+<span class="moment-number">02</span>
+<span class="moment-title">Passeios</span>
+</div>
 
-        </div>
+<p id="momento2" class="moment-text">
+Passeios e aventuras juntos.
+</p>
 
-    </section>
+</div>
 
+<div class="moment-card">
+<div class="moment-header">
+<span class="moment-number">03</span>
+<span class="moment-title">Brincadeiras</span>
+</div>
 
+<p id="momento3" class="moment-text">
+Momentos de alegria e brincadeira.
+</p>
 
-    <!-- GALERIA -->
+</div>
 
-    <section class="section container">
+</div>
 
-        <h2>Galeria</h2>
+</section>
 
-        <div id="galeria" class="gallery">
 
-            <img src="assets/img/galeria-1.jpg" alt="Foto do pet">
-            <img src="assets/img/galeria-2.jpg" alt="Foto do pet">
-            <img src="assets/img/galeria-3.jpg" alt="Foto do pet">
-            <img src="assets/img/galeria-4.jpg" alt="Foto do pet">
 
-        </div>
+<!-- GALERIA -->
 
-    </section>
+<section class="section container">
 
+<h2>Galeria</h2>
 
+<div id="galeria" class="gallery">
 
-    <!-- VÍDEO -->
+<img src="assets/img/galeria-1.jpg" alt="Foto do pet">
+<img src="assets/img/galeria-2.jpg" alt="Foto do pet">
+<img src="assets/img/galeria-3.jpg" alt="Foto do pet">
+<img src="assets/img/galeria-4.jpg" alt="Foto do pet">
 
-    <section class="section container" id="video-section" style="display:none;">
+</div>
 
-        <h2>Vídeo especial</h2>
+</section>
 
-        <div class="video-wrapper">
 
-            <iframe id="video-frame" frameborder="0" allowfullscreen>
-            </iframe>
 
-        </div>
+<!-- VIDEO -->
 
-    </section>
+<section class="section container" id="video-section" style="display:none;">
 
+<h2>Vídeo especial</h2>
 
+<div class="video-wrapper">
 
-    <!-- SEÇÃO JUNTOS -->
+<iframe id="video-frame" frameborder="0" allowfullscreen></iframe>
 
-    <section class="section container" id="juntos" style="display:none;">
+</div>
 
-        <div class="together-wrapper">
+</section>
 
-            <div class="together-photo">
-                <img id="tutor-photo" src="assets/img/tutor.jpg" alt="Tutor com o pet">
-            </div>
 
-            <div class="together-text">
 
-                <h2>Juntos</h2>
+<!-- FOTO COM TUTOR -->
 
-                <p>
-                    Uma amizade verdadeira que marcou nossas vidas.
-                    Momentos que ficam para sempre no coração.
-                </p>
+<section class="section container" id="juntos" style="display:none;">
 
-            </div>
+<div class="together-wrapper">
 
-        </div>
+<div class="together-photo">
+<img id="tutor-photo" src="assets/img/tutor.jpg" alt="Tutor com o pet">
+</div>
 
-    </section>
+<div class="together-text">
 
+<h2>Juntos</h2>
 
+<p>
+Uma amizade verdadeira que marcou nossas vidas.
+Momentos que ficam para sempre no coração.
+</p>
 
-    <!-- MÚSICA -->
+</div>
 
-    <audio id="bg-music" loop></audio>
+</div>
 
-    <button id="music-toggle" class="music-btn" style="display:none;">
-        🎵 Música
-    </button>
+</section>
 
 
 
-    <!-- FOOTER -->
+<!-- MUSICA -->
 
-    <footer class="footer">
+<audio id="bg-music" loop></audio>
 
-        <div class="container">
+<button id="music-toggle" class="music-btn" style="display:none;">
+🎵 Música
+</button>
 
-            <p>Memória com Patas</p>
 
-            <p class="small">
-                Um espaço digital para eternizar histórias de amor entre pets e suas famílias.
-            </p>
 
-        </div>
+<!-- FOOTER -->
 
-    </footer>
+<footer class="footer">
 
+<div class="container">
 
+<p>Memória com Patas</p>
 
-    <script src="script.js"></script>
+<p class="small">
+Um espaço digital para eternizar histórias de amor entre pets e suas famílias.
+</p>
+
+</div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
