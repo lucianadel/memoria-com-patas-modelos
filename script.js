@@ -234,15 +234,27 @@ if(!link) return "";
 
 if(link.includes("drive.google.com")){
 
-const id = link.split("/d/")[1]?.split("/")[0] || link.split("id=")[1];
+let id = null;
 
+if(link.includes("/d/")){
+id = link.split("/d/")[1].split("/")[0];
+}
+
+if(link.includes("id=")){
+id = link.split("id=")[1];
+}
+
+if(id){
 return `https://drive.google.com/uc?export=view&id=${id}`;
+}
 
 }
 
 return link;
 
 }
+
+
 
 
 
