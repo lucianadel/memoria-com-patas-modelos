@@ -141,9 +141,30 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 
   if (fotoPrincipal && fotos.length > 0) {
 
-    fotoPrincipal.src = fotos[0].trim();
+    fotoPrincipal.src = converterDrive(fotos[0].trim());
 
   }
+
+  function converterDrive(link){
+
+if(!link) return "";
+
+if(link.includes("drive.google.com")){
+
+const id = link.split("/d/")[1]?.split("/")[0] ||
+           link.split("id=")[1];
+
+if(id){
+
+return `https://drive.google.com/uc?export=view&id=${id}`;
+
+}
+
+}
+
+return link;
+
+}
 
 }
 
@@ -216,7 +237,7 @@ if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
 
     const img = document.createElement("img");
 
-    img.src = link.trim();
+   img.src = converterDrive(link.trim());
     img.alt = "Foto do pet";
 
     galleryContainer.appendChild(img);
@@ -271,7 +292,7 @@ if (pet["Envie a foto com o tutor/família"]) {
 
   if (tutorPhoto && juntosSection) {
 
-    tutorPhoto.src = pet["Envie a foto com o tutor/família"];
+    tutorPhoto.src = converterDrive(pet["Envie a foto com o tutor/família"]);
 
     juntosSection.style.display = "block";
 
