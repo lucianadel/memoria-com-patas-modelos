@@ -1,37 +1,19 @@
-// ==========================
-// API GOOGLE APPS SCRIPT
-// ==========================
-
 const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryTrhPAa0Q6hQKJu1N_DLxH7PyvPt9mXHpZad87pEldvkGa/exec";
-
-
-// ==========================
-// PEGAR ID DO PET NA URL
-// ==========================
 
 let petId = null;
 
 const params = new URLSearchParams(window.location.search);
 petId = params.get("petId");
 
-// fallback para URL limpa
 if (!petId) {
-
   const path = window.location.pathname;
   const parts = path.split("/");
-
   petId = parts[parts.length - 1];
-
 }
-
-
-// ==========================
-// SE NÃO EXISTIR ID
-// ==========================
 
 if (!petId || petId === "index.html") {
 
-  console.log("Modo institucional (modelo)");
+  console.log("Modo institucional");
 
   esconderLoader();
 
@@ -43,55 +25,60 @@ if (!petId || petId === "index.html") {
 
 
 
-// ==========================
-// FUNÇÃO PRINCIPAL
-// ==========================
+// BUSCAR CAMPO NA PLANILHA
+function getField(pet, nome){
+
+  for (let key in pet){
+
+    if(key.trim().startsWith(nome)){
+
+      return pet[key];
+
+    }
+
+  }
+
+  return "";
+
+}
+
+
 
 function carregarPet(id){
 
 fetch(`${API_URL}?petId=${id}`)
 
-.then(response => response.json())
+.then(res => res.json())
 
-.then(data => {
+.then(response => {
 
-  console.log("RETORNO API:", data);
+  console.log("RETORNO API:", response);
 
-  if (!data.ok) {
-
-    console.error("Pet não encontrado");
+  if(!response.ok){
 
     esconderLoader();
     return;
 
   }
 
-  const pet = data.data;
+  const pet = response.data;
+
 
 
   preencherHero(pet);
-
   preencherHistoria(pet);
-
-  preencherMomentos(pet);
-
   preencherGaleria(pet);
-
   preencherVideo(pet);
-
   preencherTutor(pet);
-
   configurarMusica(pet);
-
-  aplicarTema(pet);
 
   esconderLoader();
 
 })
 
-.catch(error => {
+.catch(err => {
 
-  console.error("Erro ao carregar API:", error);
+  console.error(err);
 
   esconderLoader();
 
@@ -101,64 +88,155 @@ fetch(`${API_URL}?petId=${id}`)
 
 
 
-// ==========================
-// FUNÇÃO AUXILIAR
-// ==========================
+function preencherHero(pet){
 
-function setText(id, value){
+setText("pet-nome", getField(pet,"Nome do pet"));
 
-  const el = document.getElementById(id);
+setText(
+"pet-meta",
+"Idade: " + getField(pet,"Qual a idade atual do seu pet") +
+" • Adoção: " + getField(pet,"Data de adoção")
+);
 
-  if(el){
-    el.innerText = value || "";
-  }
+setText("pet-frase", getField(pet,"Uma frase que define seu pet"));
+
+
+const fotoPrincipal = document.getElementById("pet-foto");
+
+const fotos = getField(pet,"Envie as fotos do seu pet");
+
+if(fotos){
+
+const lista = fotos.split(",");
+
+fotoPrincipal.src = converterDrive(lista[0].trim());
+
+}
 
 }
 
 
 
-// ==========================
-// HERO
-// ==========================
+function preencherHistoria(pet){
 
-function preencherHero(pet){
+setText("pet-historia", getField(pet,"Como vocês se conheceram"));
 
-setText("pet-nome", pet["Nome do pet"]);
+setText("pet-personalidade", getField(pet,"Descreva a personalidade"));
 
-setText(
-  "pet-meta",
-  "Idade: " + (pet["Qual a idade atual do seu pet"] || "") +
-  " • Adoção: " + (pet["Data de adoção (opcional)"] || "")
-);
+}
 
-setText("pet-frase", pet["Uma frase que define seu pet"]);
 
-const fotoPrincipal = document.getElementById("pet-foto");
 
-if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
+function preencherGaleria(pet){
 
-  const fotos = pet["Envie as fotos do seu pet (boa qualidade)"].split(",");
+const container = document.getElementById("galeria");
 
-  if (fotoPrincipal && fotos.length > 0) {
+const fotos = getField(pet,"Envie as fotos do seu pet");
 
-    fotoPrincipal.src = converterDrive(fotos[0].trim());
+if(!fotos) return;
 
-  }
+container.innerHTML = "";
 
-  function converterDrive(link){
+fotos.split(",").forEach(link => {
+
+const img = document.createElement("img");
+
+img.src = converterDrive(link.trim());
+
+container.appendChild(img);
+
+});
+
+}
+
+
+
+function preencherVideo(pet){
+
+const videoFrame = document.getElementById("video-frame");
+const videoSection = document.getElementById("video-section");
+
+let link = getField(pet,"Envie o link do vídeo");
+
+if(!link) return;
+
+if(link.includes("watch?v=")){
+
+link = link.replace("watch?v=","embed/");
+
+}
+
+videoFrame.src = link;
+
+videoSection.style.display = "block";
+
+}
+
+
+
+function preencherTutor(pet){
+
+const tutorPhoto = document.getElementById("tutor-photo");
+const juntos = document.getElementById("juntos");
+
+const foto = getField(pet,"Envie a foto com o tutor");
+
+if(!foto) return;
+
+tutorPhoto.src = converterDrive(foto);
+
+juntos.style.display = "block";
+
+}
+
+
+
+function configurarMusica(pet){
+
+const music = document.getElementById("bg-music");
+const button = document.getElementById("music-toggle");
+
+if(!music || !button) return;
+
+const escolha = getField(pet,"Deseja incluir música");
+
+if(escolha === "Sim, música instrumental padrão"){
+
+music.src = "assets/audio/musica.mp3";
+
+button.style.display = "block";
+
+button.onclick = () => {
+
+if(music.paused){
+
+music.play();
+button.innerText="⏸ Pausar música";
+
+}else{
+
+music.pause();
+button.innerText="🎵 Tocar música";
+
+}
+
+};
+
+}
+
+}
+
+
+
+function converterDrive(link){
 
 if(!link) return "";
 
 if(link.includes("drive.google.com")){
 
-const id = link.split("/d/")[1]?.split("/")[0] ||
-           link.split("id=")[1];
-
-if(id){
+const id = link.split("/d/")[1]?.split("/")[0] || link.split("id=")[1];
 
 return `https://drive.google.com/uc?export=view&id=${id}`;
-
-}
 
 }
 
@@ -166,226 +244,29 @@ return link;
 
 }
 
-}
-
-}
 
 
+function setText(id,value){
 
-// ==========================
-// HISTÓRIA
-// ==========================
+const el=document.getElementById(id);
 
-function preencherHistoria(pet){
+if(el){
 
-setText(
-  "pet-historia",
-  pet["Como vocês se conheceram?"]
-);
-
-setText(
-  "pet-personalidade",
-  pet["Descreva a personalidade do seu pet"]
-);
-
-}
-
-
-
-// ==========================
-// MOMENTOS
-// ==========================
-
-function preencherMomentos(pet){
-
-setText("momento1", pet["Momentos marcantes (até 5)"]);
-
-setText("momento2", pet["Descreva a personalidade do seu pet"]);
-
-setText("momento3", pet["Uma frase que define seu pet"]);
-
-setText("timeline1-titulo", "Chegada na família");
-setText("timeline1-texto", pet["Como vocês se conheceram?"]);
-
-setText("timeline2-titulo", "Momentos especiais");
-setText("timeline2-texto", pet["Momentos marcantes (até 5)"]);
-
-setText("timeline3-titulo", "Uma frase especial");
-setText("timeline3-texto", pet["Uma frase que define seu pet"]);
-
-}
-
-
-
-// ==========================
-// GALERIA
-// ==========================
-
-function preencherGaleria(pet){
-
-const galleryContainer = document.getElementById("galeria");
-
-if (!galleryContainer) return;
-
-if (pet["Envie as fotos do seu pet (boa qualidade)"]) {
-
-  const fotos = pet["Envie as fotos do seu pet (boa qualidade)"].split(",");
-
-  galleryContainer.innerHTML = "";
-
-  fotos.forEach(link => {
-
-    const img = document.createElement("img");
-
-   img.src = converterDrive(link.trim());
-    img.alt = "Foto do pet";
-
-    galleryContainer.appendChild(img);
-
-  });
+el.innerText=value || "";
 
 }
 
 }
 
 
-
-// ==========================
-// VIDEO
-// ==========================
-
-function preencherVideo(pet){
-
-const videoFrame = document.getElementById("video-frame");
-const videoSection = document.getElementById("video-section");
-
-let videoLink = pet["Envie o link do vídeo (YouTube ou Google Drive)"];
-
-if (videoLink && videoFrame && videoSection) {
-
-  if(videoLink.includes("watch?v=")){
-
-    videoLink = videoLink.replace("watch?v=","embed/");
-
-  }
-
-  videoFrame.src = videoLink;
-
-  videoSection.style.display = "block";
-
-}
-
-}
-
-
-
-// ==========================
-// FOTO COM TUTOR
-// ==========================
-
-function preencherTutor(pet){
-
-const tutorPhoto = document.getElementById("tutor-photo");
-const juntosSection = document.getElementById("juntos");
-
-if (pet["Envie a foto com o tutor/família"]) {
-
-  if (tutorPhoto && juntosSection) {
-
-    tutorPhoto.src = converterDrive(pet["Envie a foto com o tutor/família"]);
-
-    juntosSection.style.display = "block";
-
-  }
-
-}
-
-}
-
-
-
-// ==========================
-// MÚSICA
-// ==========================
-
-function configurarMusica(pet){
-
-const music = document.getElementById("bg-music");
-const button = document.getElementById("music-toggle");
-
-if (!music || !button) return;
-
-if (pet["Deseja incluir música de fundo no site?"] === "Sim, música instrumental padrão") {
-
-  music.src = "assets/audio/musica.mp3";
-
-  button.style.display = "block";
-
-  button.innerText = "🎵 Tocar música";
-
-  button.addEventListener("click", () => {
-
-    if (music.paused) {
-
-      music.play();
-
-      button.innerText = "⏸ Pausar música";
-
-    } else {
-
-      music.pause();
-
-      button.innerText = "🎵 Tocar música";
-
-    }
-
-  });
-
-}
-
-}
-
-
-
-// ==========================
-// TEMA VIDA / MEMORIAL
-// ==========================
-
-function aplicarTema(pet){
-
-const fotoPrincipal = document.getElementById("pet-foto");
-
-if (pet["Qual tipo de página você deseja criar?"] === "Memorial") {
-
-  document.body.classList.add("tema-memorial");
-
-  if (fotoPrincipal && !fotoPrincipal.src) {
-
-    fotoPrincipal.src = "assets/img/memorial-placeholder.jpg";
-
-  }
-
-} else {
-
-  document.body.classList.add("tema-vida");
-
-}
-
-}
-
-
-
-// ==========================
-// LOADER
-// ==========================
 
 function esconderLoader(){
 
-const loader = document.getElementById("loader");
+const loader=document.getElementById("loader");
 
 if(loader){
 
-  loader.style.display = "none";
+loader.style.display="none";
 
 }
 
