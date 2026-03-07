@@ -14,7 +14,6 @@ if (!petId) {
 if (!petId || petId === "index.html") {
 
   console.log("Modo institucional");
-
   esconderLoader();
 
 } else {
@@ -25,7 +24,10 @@ if (!petId || petId === "index.html") {
 
 
 
-// BUSCAR CAMPO NA PLANILHA
+// ======================
+// BUSCAR CAMPO PLANILHA
+// ======================
+
 function getField(pet, nome){
 
   for (let key in pet){
@@ -44,6 +46,10 @@ function getField(pet, nome){
 
 
 
+// ======================
+// CARREGAR PET
+// ======================
+
 function carregarPet(id){
 
 fetch(`${API_URL}?petId=${id}`)
@@ -55,18 +61,15 @@ fetch(`${API_URL}?petId=${id}`)
   console.log("RETORNO API:", response);
 
   if(!response.ok){
-
     esconderLoader();
     return;
-
   }
 
   const pet = response.data;
 
-
-
   preencherHero(pet);
   preencherHistoria(pet);
+  preencherMomentos(pet);
   preencherGaleria(pet);
   preencherVideo(pet);
   preencherTutor(pet);
@@ -79,7 +82,6 @@ fetch(`${API_URL}?petId=${id}`)
 .catch(err => {
 
   console.error(err);
-
   esconderLoader();
 
 });
@@ -88,14 +90,27 @@ fetch(`${API_URL}?petId=${id}`)
 
 
 
+// ======================
+// HERO
+// ======================
+
 function preencherHero(pet){
 
 setText("pet-nome", getField(pet,"Nome do pet"));
 
+const idade = getField(pet,"Qual a idade atual do seu pet");
+
+let adocao = getField(pet,"Data de adoção");
+
+if(adocao){
+
+  adocao = new Date(adocao).toLocaleDateString("pt-BR");
+
+}
+
 setText(
 "pet-meta",
-"Idade: " + getField(pet,"Qual a idade atual do seu pet") +
-" • Adoção: " + getField(pet,"Data de adoção")
+"Idade: " + idade + " • Adoção: " + adocao
 );
 
 setText("pet-frase", getField(pet,"Uma frase que define seu pet"));
@@ -117,15 +132,61 @@ fotoPrincipal.src = converterDrive(lista[0].trim());
 
 
 
+// ======================
+// HISTÓRIA
+// ======================
+
 function preencherHistoria(pet){
 
-setText("pet-historia", getField(pet,"Como vocês se conheceram"));
+let historia = getField(pet,"Como vocês se conheceram");
 
-setText("pet-personalidade", getField(pet,"Descreva a personalidade"));
+if(!historia){
+
+historia="Toda amizade começa com um encontro especial.";
+
+}
+
+setText("pet-historia", historia);
+
+let personalidade = getField(pet,"Descreva a personalidade");
+
+if(!personalidade){
+
+personalidade="Um pet cheio de amor e alegria.";
+
+}
+
+setText("pet-personalidade", personalidade);
 
 }
 
 
+
+// ======================
+// MOMENTOS
+// ======================
+
+function preencherMomentos(pet){
+
+const momento = getField(pet,"Momentos marcantes");
+
+if(!momento) return;
+
+setText("momento1", momento);
+setText("momento2", momento);
+setText("momento3", momento);
+
+setText("timeline1-texto", getField(pet,"Como vocês se conheceram"));
+setText("timeline2-texto", momento);
+setText("timeline3-texto", getField(pet,"Uma frase que define seu pet"));
+
+}
+
+
+
+// ======================
+// GALERIA
+// ======================
 
 function preencherGaleria(pet){
 
@@ -143,6 +204,8 @@ const img = document.createElement("img");
 
 img.src = converterDrive(link.trim());
 
+img.classList.add("foto-galeria");
+
 container.appendChild(img);
 
 });
@@ -150,6 +213,10 @@ container.appendChild(img);
 }
 
 
+
+// ======================
+// VIDEO
+// ======================
 
 function preencherVideo(pet){
 
@@ -174,6 +241,10 @@ videoSection.style.display = "block";
 
 
 
+// ======================
+// FOTO COM TUTOR
+// ======================
+
 function preencherTutor(pet){
 
 const tutorPhoto = document.getElementById("tutor-photo");
@@ -190,6 +261,10 @@ juntos.style.display = "block";
 }
 
 
+
+// ======================
+// MUSICA
+// ======================
 
 function configurarMusica(pet){
 
@@ -228,6 +303,10 @@ button.innerText="🎵 Tocar música";
 
 
 
+// ======================
+// CONVERTER DRIVE
+// ======================
+
 function converterDrive(link){
 
 if(!link) return "";
@@ -256,7 +335,9 @@ return link;
 
 
 
-
+// ======================
+// AUXILIARES
+// ======================
 
 function setText(id,value){
 
