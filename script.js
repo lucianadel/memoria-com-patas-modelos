@@ -266,6 +266,8 @@ juntos.style.display = "block";
 // MUSICA
 // ======================
 
+
+
 function configurarMusica(pet){
 
 const music = document.getElementById("bg-music");
@@ -273,15 +275,23 @@ const button = document.getElementById("music-toggle");
 
 if(!music || !button) return;
 
-const escolha = getField(pet,"Deseja incluir música");
+const tipo = getField(pet,"Qual tipo de página você deseja criar");
 
-if(escolha === "Sim, música instrumental padrão"){
+if(tipo === "Celebrar a vida"){
 
-music.src = "assets/audio/musica.mp3";
+music.src="assets/audio/vida.mp3";
 
-button.style.display = "block";
+}
 
-button.onclick = () => {
+if(tipo === "Homenagem memorial"){
+
+music.src="assets/audio/memorial.mp3";
+
+}
+
+button.style.display="block";
+
+button.onclick=()=>{
 
 if(music.paused){
 
@@ -298,9 +308,6 @@ button.innerText="🎵 Tocar música";
 };
 
 }
-
-}
-
 
 
 // ======================
