@@ -1,4 +1,14 @@
+// ======================
+// API
+// ======================
+
 const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryTrhPAa0Q6hQKJu1N_DLxH7PyvPt9mXHpZad87pEldvkGa/exec";
+
+
+
+// ======================
+// PEGAR ID DO PET
+// ======================
 
 let petId = null;
 
@@ -6,19 +16,21 @@ const params = new URLSearchParams(window.location.search);
 petId = params.get("petId");
 
 if (!petId) {
-  const path = window.location.pathname;
-  const parts = path.split("/");
-  petId = parts[parts.length - 1];
+
+const path = window.location.pathname;
+const parts = path.split("/");
+petId = parts[parts.length - 1];
+
 }
 
 if (!petId || petId === "index.html") {
 
-  console.log("Modo institucional");
-  esconderLoader();
+console.log("Modo institucional");
+esconderLoader();
 
 } else {
 
-  carregarPet(petId);
+carregarPet(petId);
 
 }
 
@@ -28,19 +40,19 @@ if (!petId || petId === "index.html") {
 // BUSCAR CAMPO PLANILHA
 // ======================
 
-function getField(pet, nome){
+function getField(pet,nome){
 
-  for (let key in pet){
+for (let key in pet){
 
-    if(key.trim().startsWith(nome)){
+if(key.trim().startsWith(nome)){
 
-      return pet[key];
+return pet[key];
 
-    }
+}
 
-  }
+}
 
-  return "";
+return "";
 
 }
 
@@ -58,31 +70,35 @@ fetch(`${API_URL}?petId=${id}`)
 
 .then(response => {
 
-  console.log("RETORNO API:", response);
+console.log("RETORNO API:",response);
 
-  if(!response.ok){
-    esconderLoader();
-    return;
-  }
+if(!response.ok){
 
-  const pet = response.data;
+console.error("Pet não encontrado");
+esconderLoader();
+return;
 
-  preencherHero(pet);
-  preencherHistoria(pet);
-  preencherMomentos(pet);
-  preencherGaleria(pet);
-  preencherVideo(pet);
-  preencherTutor(pet);
-  configurarMusica(pet);
+}
 
-  esconderLoader();
+const pet = response.data;
+
+preencherHero(pet);
+preencherHistoria(pet);
+preencherMomentos(pet);
+preencherGaleria(pet);
+preencherVideo(pet);
+preencherTutor(pet);
+configurarMusica(pet);
+aplicarTema(pet);
+
+esconderLoader();
 
 })
 
-.catch(err => {
+.catch(error => {
 
-  console.error(err);
-  esconderLoader();
+console.error("Erro ao carregar API:",error);
+esconderLoader();
 
 });
 
@@ -96,7 +112,7 @@ fetch(`${API_URL}?petId=${id}`)
 
 function preencherHero(pet){
 
-setText("pet-nome", getField(pet,"Nome do pet"));
+setText("pet-nome",getField(pet,"Nome do pet"));
 
 const idade = getField(pet,"Qual a idade atual do seu pet");
 
@@ -104,17 +120,16 @@ let adocao = getField(pet,"Data de adoção");
 
 if(adocao){
 
-  adocao = new Date(adocao).toLocaleDateString("pt-BR");
+adocao = new Date(adocao).toLocaleDateString("pt-BR");
 
 }
 
 setText(
 "pet-meta",
-"Idade: " + idade + " • Adoção: " + adocao
+`Idade: ${idade} • Adoção: ${adocao}`
 );
 
-setText("pet-frase", getField(pet,"Uma frase que define seu pet"));
-
+setText("pet-frase",getField(pet,"Uma frase que define seu pet"));
 
 const fotoPrincipal = document.getElementById("pet-foto");
 
@@ -146,7 +161,7 @@ historia="Toda amizade começa com um encontro especial.";
 
 }
 
-setText("pet-historia", historia);
+setText("pet-historia",historia);
 
 let personalidade = getField(pet,"Descreva a personalidade");
 
@@ -156,7 +171,7 @@ personalidade="Um pet cheio de amor e alegria.";
 
 }
 
-setText("pet-personalidade", personalidade);
+setText("pet-personalidade",personalidade);
 
 }
 
@@ -172,13 +187,13 @@ const momento = getField(pet,"Momentos marcantes");
 
 if(!momento) return;
 
-setText("momento1", momento);
-setText("momento2", momento);
-setText("momento3", momento);
+setText("momento1",momento);
+setText("momento2",momento);
+setText("momento3",momento);
 
-setText("timeline1-texto", getField(pet,"Como vocês se conheceram"));
-setText("timeline2-texto", momento);
-setText("timeline3-texto", getField(pet,"Uma frase que define seu pet"));
+setText("timeline1-texto",getField(pet,"Como vocês se conheceram"));
+setText("timeline2-texto",momento);
+setText("timeline3-texto",getField(pet,"Uma frase que define seu pet"));
 
 }
 
@@ -196,14 +211,13 @@ const fotos = getField(pet,"Envie as fotos do seu pet");
 
 if(!fotos) return;
 
-container.innerHTML = "";
+container.innerHTML="";
 
 fotos.split(",").forEach(link => {
 
 const img = document.createElement("img");
 
 img.src = converterDrive(link.trim());
-
 img.classList.add("foto-galeria");
 
 container.appendChild(img);
@@ -234,8 +248,7 @@ link = link.replace("watch?v=","embed/");
 }
 
 videoFrame.src = link;
-
-videoSection.style.display = "block";
+videoSection.style.display="block";
 
 }
 
@@ -255,18 +268,15 @@ const foto = getField(pet,"Envie a foto com o tutor");
 if(!foto) return;
 
 tutorPhoto.src = converterDrive(foto);
-
-juntos.style.display = "block";
+juntos.style.display="block";
 
 }
 
 
 
 // ======================
-// MUSICA
+// MÚSICA
 // ======================
-
-
 
 function configurarMusica(pet){
 
@@ -291,7 +301,7 @@ music.src="assets/audio/memorial.mp3";
 
 button.style.display="block";
 
-button.onclick=()=>{
+button.onclick = () => {
 
 if(music.paused){
 
@@ -310,6 +320,31 @@ button.innerText="🎵 Tocar música";
 }
 
 
+
+// ======================
+// APLICAR TEMA
+// ======================
+
+function aplicarTema(pet){
+
+const tipo = getField(pet,"Qual tipo de página você deseja criar");
+
+if(tipo === "Celebrar a vida"){
+
+document.body.classList.add("tema-vida");
+
+}
+
+if(tipo === "Homenagem memorial"){
+
+document.body.classList.add("tema-memorial");
+
+}
+
+}
+
+
+
 // ======================
 // CONVERTER DRIVE
 // ======================
@@ -320,7 +355,7 @@ if(!link) return "";
 
 if(link.includes("drive.google.com")){
 
-let id = null;
+let id=null;
 
 if(link.includes("/d/")){
 id = link.split("/d/")[1].split("/")[0];
@@ -348,11 +383,11 @@ return link;
 
 function setText(id,value){
 
-const el=document.getElementById(id);
+const el = document.getElementById(id);
 
 if(el){
 
-el.innerText=value || "";
+el.innerText = value || "";
 
 }
 
@@ -362,7 +397,7 @@ el.innerText=value || "";
 
 function esconderLoader(){
 
-const loader=document.getElementById("loader");
+const loader = document.getElementById("loader");
 
 if(loader){
 
