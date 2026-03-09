@@ -365,23 +365,28 @@ if(link.includes("drive.google.com")){
 
 let id = null;
 
-// formato /file/d/
+/* formato file/d/ */
+
 if(link.includes("/d/")){
 id = link.split("/d/")[1].split("/")[0];
 }
 
-// formato open?id=
+/* formato open?id= */
+
 if(link.includes("id=")){
 id = link.split("id=")[1].split("&")[0];
 }
 
-// formato uc?id=
+/* formato uc?id= */
+
 if(link.includes("uc?id=")){
 id = link.split("uc?id=")[1].split("&")[0];
 }
 
 if(id){
+
 return `https://drive.google.com/uc?export=view&id=${id}`;
+
 }
 
 }
@@ -389,6 +394,8 @@ return `https://drive.google.com/uc?export=view&id=${id}`;
 return link;
 
 }
+
+
 
 // ======================
 // AUXILIARES
