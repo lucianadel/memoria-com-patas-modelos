@@ -5,7 +5,6 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbyLjG8YJdueop639IyaPryTrhPAa0Q6hQKJu1N_DLxH7PyvPt9mXHpZad87pEldvkGa/exec";
 
 
-
 // ======================
 // PEGAR ID DO PET
 // ======================
@@ -124,10 +123,7 @@ adocao = new Date(adocao).toLocaleDateString("pt-BR");
 
 }
 
-setText(
-"pet-meta",
-`Idade: ${idade} • Adoção: ${adocao}`
-);
+setText("pet-meta",`Idade: ${idade || ""} • Adoção: ${adocao || ""}`);
 
 setText("pet-frase",getField(pet,"Uma frase que define seu pet"));
 
@@ -135,11 +131,17 @@ const fotoPrincipal = document.getElementById("pet-foto");
 
 const fotos = getField(pet,"Envie as fotos do seu pet");
 
-if(fotos){
+if(fotoPrincipal && fotos){
 
 const lista = fotos.split(",");
 
-fotoPrincipal.src = converterDrive(lista[0].trim());
+const primeiraFoto = converterDrive(lista[0].trim());
+
+if(primeiraFoto){
+
+fotoPrincipal.src = primeiraFoto;
+
+}
 
 }
 
@@ -207,6 +209,8 @@ function preencherGaleria(pet){
 
 const container = document.getElementById("galeria");
 
+if(!container) return;
+
 const fotos = getField(pet,"Envie as fotos do seu pet");
 
 if(!fotos) return;
@@ -215,9 +219,13 @@ container.innerHTML="";
 
 fotos.split(",").forEach(link => {
 
+const url = converterDrive(link.trim());
+
+if(!url) return;
+
 const img = document.createElement("img");
 
-img.src = converterDrive(link.trim());
+img.src = url;
 img.classList.add("foto-galeria");
 
 container.appendChild(img);
@@ -239,7 +247,7 @@ const videoSection = document.getElementById("video-section");
 
 let link = getField(pet,"Envie o link do vídeo");
 
-if(!link) return;
+if(!link || !videoFrame || !videoSection) return;
 
 if(link.includes("watch?v=")){
 
@@ -265,7 +273,7 @@ const juntos = document.getElementById("juntos");
 
 const foto = getField(pet,"Envie a foto com o tutor");
 
-if(!foto) return;
+if(!foto || !tutorPhoto || !juntos) return;
 
 tutorPhoto.src = converterDrive(foto);
 juntos.style.display="block";
@@ -392,8 +400,6 @@ el.innerText = value || "";
 }
 
 }
-
-
 
 function esconderLoader(){
 
